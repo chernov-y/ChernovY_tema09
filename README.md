@@ -1,1 +1,8 @@
 # ChernovY_tema09
+1.Despre texturi cu și fără transparență Aici e simplu: diferența o face canalul Alpha. La imaginile fără transparență (RGB, gen JPEG), toți pixelii sunt opaci, deci textura acoperă complet obiectul și nu vezi nimic prin ea. La cele cu transparență (RGBA, gen PNG), ai canalul Alpha care decide opacitatea. Dacă Alpha e sub 1.0, pixelul e transparent și lasă să se vadă fundalul sau ce e în spate. Ca să meargă chestia asta în OpenGL, trebuie neapărat activat Blending-ul.
+
+2.Ce formate de imagini folosim OpenGL lucrează intern cu formate brute, dar noi încărcăm texturile din fișiere cu diverse biblioteci. Cel mai des folosim PNG când avem nevoie de transparență (că nu strică calitatea), JPEG pentru texturi pline (fără transparență) și uneori TGA sau DDS pentru că sunt comprimate și se încarcă rapid.
+
+3.Cum influențează culoarea obiectului textura Totul ține de modul setat. Dacă e pe GL_MODULATE, culoarea obiectului se înmulțește cu textura. Practic, funcționează ca un filtru colorat pus peste imagine. Dacă e pe GL_REPLACE, textura e "șefa". Ea înlocuiește complet culoarea obiectului, deci poți să schimbi culoarea obiectului cât vrei, că vizual nu se schimbă nimic, se vede doar textura.
+
+4. Lumină ON vs. Lumină OFF Când lumina e stinsă (glDisable), totul arată plat. Obiectul e luminat uniform peste tot, nu are umbre și arată destul de nerealist, se vede doar culoarea pură a texturii. Când activezi lumina (glEnable), scena prinde viață. Apar umbre, zone mai luminoase sau mai întunecate în funcție de unde bate lumina (specular, difuz), iar obiectul arată a 3D, nu doar ca un desen 2D.
